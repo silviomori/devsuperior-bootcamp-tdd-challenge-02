@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsuperior.bds02.dto.CityDTO;
+import com.devsuperior.bds02.entities.City;
 import com.devsuperior.bds02.repositories.CityRepository;
 
 @Service
@@ -22,6 +23,11 @@ public class CityService {
 		return repository.findAll(Sort.by(sortBy))
 				.stream().map(entity -> new CityDTO(entity))
 				.collect(Collectors.toList());
+	}
+
+	public void delete(Long id) {
+		City entity = repository.getOne(id);
+		repository.delete(entity);
 	}
 
 }
